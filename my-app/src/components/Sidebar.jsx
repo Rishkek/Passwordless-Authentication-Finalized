@@ -4,6 +4,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <h2 className="logo">KeyAuth</h2>
+      <div className="sidebar-section-label">Navigation</div>
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/profile">Profile</NavLink>
