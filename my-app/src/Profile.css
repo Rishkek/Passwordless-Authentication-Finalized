@@ -17,7 +17,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Page Centering */
+
 .page {
   flex: 1;
   padding: 3rem;
@@ -29,7 +29,7 @@ body {
   min-height: 100vh;
 }
 
-/* Container */
+
 .profile-container {
   width: 100%;
   max-width: 500px;
@@ -38,7 +38,7 @@ body {
   transform: translateX(50px);
 }
 
-/* Header */
+
 .profile-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -57,7 +57,7 @@ body {
   font-weight: 600;
 }
 
-/* Tabs */
+
 .tabs {
   display: flex;
   border: 1px solid var(--border);
@@ -81,7 +81,7 @@ body {
   color: #000;
 }
 
-/* Form Box */
+
 .form-box {
   margin-top: 2rem;
   border-radius: 20px;
@@ -98,7 +98,7 @@ body {
   box-shadow: 0 0 20px var(--accent);
 }
 
-/* Corner accents */
+
 .form-box::before,
 .form-box::after {
   content: "";
@@ -117,14 +117,14 @@ body {
   border-right: 2px solid var(--accent);
 }
 
-/* Form */
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-/* Inputs */
+
 .input-group {
   display: flex;
   flex-direction: column;
@@ -167,7 +167,7 @@ body {
   box-shadow: 0 0 14px var(--accent-glow);
 }
 
-/* Password Eye */
+
 .password-eye {
   position: absolute;
   right: 16px;
@@ -183,7 +183,7 @@ body {
   color: var(--accent);
 }
 
-/* Submit Button */
+
 .submit-btn {
   border-radius: 8px;
   width: 100%;
@@ -207,7 +207,6 @@ body {
   background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
-/* Messages */
 .error-message {
   color: #ff4d4d;
   font-size: 0.8rem;

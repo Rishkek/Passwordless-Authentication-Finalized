@@ -32,10 +32,10 @@ function Home({ setCurrentUser }) {
           </p>
 
           <div className="hero-actions">
-            {/* Preserved your CTA buttons */}
+
            
 
-            {/* Logout remains functional */}
+
             <button className="logout-btn" onClick={handleLogout}>
               LOGOUT
             </button>

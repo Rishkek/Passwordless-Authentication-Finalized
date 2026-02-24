@@ -31,14 +31,14 @@ function AddUser() {
   const [inputValue, setInputValue] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Keystroke tracking
+
   const keyDownTimes = useRef({});
   const lastKeyDownTime = useRef(null);
   const lastKeyUpTime = useRef(null);
   const previousKey = useRef("START");
   const keystrokeBuffer = useRef([]);
 
-  // Session tracking
+
   const sessionStartTime = useRef(null);
   const allSessions = useRef([]);
 
@@ -58,7 +58,7 @@ function AddUser() {
     allSessions.current = [];
   };
 
-  // KEYDOWN
+
   const handleKeyDown = (e) => {
     const now = performance.now() / 1000;
 
@@ -76,7 +76,7 @@ function AddUser() {
       ? now - lastKeyUpTime.current
       : 0;
 
-    // Proper overlap detection
+
     const isOverlap =
       lastKeyUpTime.current && lastKeyUpTime.current > lastKeyDownTime.current
         ? 1
@@ -93,7 +93,7 @@ function AddUser() {
     lastKeyDownTime.current = now;
   };
 
-  // KEYUP
+
   const handleKeyUp = (e) => {
     const now = performance.now() / 1000;
     const keyDownTime = keyDownTimes.current[e.key];
@@ -112,7 +112,7 @@ function AddUser() {
     previousKey.current = e.key;
   };
 
-  // Helpers
+
   const calculateWPM = (typedText, startTime, endTime) => {
     if (!startTime) return 0;
     const minutes = (endTime - startTime) / 60;
@@ -171,7 +171,6 @@ function AddUser() {
 
     allSessions.current.push(sentenceCapture);
 
-    // Reset trackers
     keystrokeBuffer.current = [];
     previousKey.current = "START";
     lastKeyDownTime.current = null;
@@ -213,7 +212,7 @@ function AddUser() {
         setIsSubmitting(false);
       }
 
-      // Reset UI
+
       setTrainingMode(false);
       setName("");
       setSentences([]);
@@ -232,12 +231,13 @@ function AddUser() {
             <h1 className="title">Add User</h1>
           </div>
 
-          <div className="auth-wrapper">
-            <div className="form-box">
-              <div className="input-group">
-                <label>NAME</label>
+          <div className="training-wrapper">
+            <div className="training-card">
+              <div className="training-section">
+                <div className="training-label">NAME</div>
                 <input
                   type="text"
+                  className="training-input"
                   placeholder="Full name..."
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -245,7 +245,7 @@ function AddUser() {
               </div>
 
               <button
-                className="submit-btn"
+                className="training-btn"
                 onClick={handleTrain}
                 disabled={!name.trim()}
               >
@@ -261,16 +261,20 @@ function AddUser() {
             <h1 className="title">Training — {name}</h1>
           </div>
 
-          <div className="auth-wrapper">
-            <div className="form-box">
-              <div className="sentence-box">
-                <label>TYPE THIS:</label>
-                <p>{sentences[currentIndex]}</p>
+          <div className="training-wrapper">
+            <div className="training-card">
+
+              <div className="training-section">
+                <div className="training-label">TYPE THIS:</div>
+                <div className="training-sentence">
+                  {sentences[currentIndex]}
+                </div>
               </div>
 
               <input
                 type="text"
                 className="training-input"
+                placeholder="Start typing here..."
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -282,7 +286,7 @@ function AddUser() {
               </div>
 
               <button
-                className="submit-btn"
+                className="training-btn"
                 onClick={handleNext}
                 disabled={!inputValue.trim() || isSubmitting}
               >
@@ -292,6 +296,7 @@ function AddUser() {
                   ? "FINISH"
                   : "NEXT"}
               </button>
+
             </div>
           </div>
         </>

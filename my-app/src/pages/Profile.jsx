@@ -10,7 +10,7 @@ function Profile({ currentUser, setCurrentUser }) {
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
 
-  // Password visibility toggles (from his version)
+
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [showSignupPassword, setShowSignupPassword] = useState(false);
 
@@ -37,7 +37,7 @@ function Profile({ currentUser, setCurrentUser }) {
     localStorage.setItem("keyAuth_users", JSON.stringify(existingUsers));
     localStorage.setItem("keyAuth_currentUser", JSON.stringify(newUser));
 
-    setCurrentUser(newUser); // App.jsx handles redirect
+    setCurrentUser(newUser);
   };
 
   const handleLogin = (e) => {
@@ -58,7 +58,7 @@ function Profile({ currentUser, setCurrentUser }) {
         "keyAuth_currentUser",
         JSON.stringify(foundUser)
       );
-      setCurrentUser(foundUser); // App.jsx handles redirect
+      setCurrentUser(foundUser); 
     } else {
       setError("Invalid credentials. Please try again.");
     }
@@ -159,7 +159,7 @@ function Profile({ currentUser, setCurrentUser }) {
                 LOGIN
               </button>
 
-              {/* Preserved your helper text */}
+
               <p className="helper-text">
                 Uses keystroke-dynamics if training data exists.
               </p>

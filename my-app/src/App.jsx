@@ -34,7 +34,7 @@ function App() {
       <div className="page">
         <Routes>
 
-          {/* ROOT REDIRECT */}
+
           <Route
             path="/"
             element={
@@ -42,7 +42,7 @@ function App() {
             }
           />
 
-          {/* LOGIN */}
+
           <Route
             path="/profile"
             element={
@@ -52,7 +52,6 @@ function App() {
             }
           />
 
-          {/* HOME */}
           <Route
             path="/home"
             element={
@@ -62,7 +61,7 @@ function App() {
             }
           />
 
-          {/* ADD USER */}
+
           <Route
             path="/add-user"
             element={
@@ -72,7 +71,7 @@ function App() {
             }
           />
 
-          {/* SETTINGS */}
+
           <Route
             path="/settings"
             element={
@@ -82,7 +81,7 @@ function App() {
             }
           />
 
-          {/* CATCH ALL */}
+
           <Route path="*" element={<Navigate to="/" />} />
 
         </Routes>

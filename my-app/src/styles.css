@@ -277,9 +277,10 @@ button.secondary {
 
 .theme-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 3rem;
 }
+
 .theme-option {
   padding: 1.2rem;
   border-radius: 14px;
@@ -295,6 +296,7 @@ button.secondary {
 .theme-option:hover {
   border-color: var(--accent);
   box-shadow: 0 0 16px var(--accent);
+  transform: scale(1.02);
 }
 
 .theme-option.active {
@@ -304,7 +306,8 @@ button.secondary {
 }
 
 .theme-preview {
-  height: 80px;
+  width: 300px;
+  height: 150px;
   border-radius: 10px;
   margin-bottom: 1rem;
   background-size: cover;
@@ -390,7 +393,6 @@ button.secondary {
   width: 100%;
 }
 
-
 .hero-actions {
   display: flex;
   flex-direction: column;
@@ -406,33 +408,154 @@ button.secondary {
   flex-wrap: wrap;
 }
 
+
+
+.training-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.training-card {
+  width: 100%;
+  max-width: 640px;
+
+  padding: 56px 48px;
+
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 24px;
+
+  box-shadow:
+    0 0 40px color-mix(in srgb, var(--accent) 40%, transparent),
+    0 0 80px color-mix(in srgb, var(--accent) 15%, transparent);
+
+  display: flex;
+  flex-direction: column;
+  gap: 36px;  
+}
+
+
+.training-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.training-label {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.training-sentence {
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+
+
 .training-input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 18px 20px;
 
-  background: color-mix(in srgb, var(--panel) 80%, black);
+  background: rgba(0,0,0,0.45);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 16px;
 
-  color: var(--text);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 1px;
+  color: var(--text);
 
-  outline: none;
-  transition: all 0.25s ease;
-}
-.training-input {
-  margin-left: -16px;
-  margin-bottom: 10px;
-}
-
-.training-input::placeholder {
-  color: var(--muted);
-  opacity: 0.5;
+  transition: 0.25s ease;
 }
 
 .training-input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 14px var(--accent-glow);
+  box-shadow: 0 0 20px var(--accent);
+  outline: none;
+}
+
+
+
+.session-counter {
+  font-size: 12px;
+  opacity: 0.5;
+  margin-top: -10px; 
+}
+
+
+
+.training-btn {
+  margin-top: 10px;
+  padding: 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  font-size: 14px;
+
+  border: 1px solid var(--accent);
+}
+
+.training-btn:hover {
+  box-shadow: 0 0 20px var(--accent);
+}
+
+.training-card:hover {
+  transform: translateY(-4px);
+}
+
+
+.training-card {
+  max-width: 560px;
+  width: 100%;
+  margin: 2rem auto 0 auto;  
+  padding: 3.5rem 3rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.training-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.training-sentence {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.training-input {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.training-btn {
+  margin-top: 1rem;
+}
+
+
+
+.training-card {
+  box-sizing: border-box;
+}
+
+.training-section,
+.training-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.training-sentence {
+  padding-left: 2px; 
+}
+
+.training-input {
+  display: block;
+  margin: 0;             
 }
