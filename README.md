@@ -1,76 +1,64 @@
-🛡️ Passwordless Auth: Keystroke Dynamics & Behavioral Biometrics
-This repository contains a specialized authentication engine that uses Behavioral Biometrics to verify identity. Instead of a static password, it analyzes the unique timing and rhythm—the "DNA of typing"—of a user.
+# 🛡️ **Passwordless Auth: Behavioral Keystroke Dynamics**
 
-📊 Technical Parameters & Metrics
-The system analyzes every keystroke through the lens of nine specific metrics to build a high-fidelity behavioral profile:
+### *Authenticating users by the rhythm of their soul, not just the content of their memory.*
 
-Key: The ASCII/Unicode value of the specific character pressed.
+This repository implements a cutting-edge **Behavioral Biometric** system. Instead of relying on vulnerable static passwords, it analyzes the unique physical interaction between a human and their keyboard—a signature that is nearly impossible to replicate, share, or steal.
 
-Key_Pair: The "Digram" (combination of two keys, e.g., 'T' followed by 'H'). This is crucial because transitions between specific finger pairs are highly unique.
+---
 
-Flight Up Time: The time elapsed from releasing Key A to releasing Key B.
+## 🧠 **Core Biometric Parameters**
 
-Flight Down Time: The time elapsed from pressing Key A to pressing Key B.
+The engine processes every keystroke through **nine distinct layers** of temporal and spatial data to verify identity:
 
-Dwell Time: The "Hold Time"—how long a single key remains depressed (T 
-release
-​	
- −T 
-press
-​	
- ).
+1. **Key:** The specific character value identified during the input event.
+2. **Key_Pair:** The "Digram" sequence (e.g., the transition from 'G' to 'H'). Finger movement patterns between specific keys are highly individualistic.
+3. **Flight Up Time:** The time elapsed between the release of the first key and the release of the second key.
+4. **Flight Down Time:** The interval from the initial press of Key A to the initial press of Key B.
+5. **Dwell Time:** The "Hold Time"—the exact duration a single key remains depressed.
+6. **Overlap:** A critical metric for fluent typists; it measures the millisecond duration where Key B is pressed before Key A has been released.
+7. **Session WPM:** The global average "Words Per Minute" calculated across the entire authentication attempt.
+8. **Grid Distance:** The physical distance between keys on a standard QWERTY layout. This is used to "weight" the timing; a "long jump" across the keyboard is expected to have different timing than adjacent keys.
+9. **Instant WPM:** The "Burst Speed"—the localized WPM calculated at the exact moment of a specific key transition, capturing micro-fluctuations in rhythm.
 
-Overlap: The specific duration where Key B is pressed before Key A is released. High overlap is a signature of proficient, fluent typists.
+---
 
-Session WPM: The average typing speed (Words Per Minute) across the entire authentication attempt.
+## ⚙️ **Sequence of Events (Execution Flow)**
 
-Grid Distance: A spatial metric representing the physical distance between keys on a standard QWERTY layout, used to weigh the timing data.
+The system operates in a high-speed pipeline to ensure authentication happens in near real-time:
 
-Instant WPM: The "burst speed"—the calculated WPM at the exact moment of a specific key transition, capturing micro-fluctuations in rhythm.
+### **1. Capture (React Frontend)**
 
-⚙️ Sequence of Events (Execution Flow)
-The authentication process follows a strict linear pipeline to ensure data integrity:
+The interface utilizes low-level event hooks to catch every press and release signal. It records high-resolution timestamps with millisecond precision and packages them into a temporal sequence for analysis.
 
-Step 1: Event Hooking (React)
+### **2. Feature Extraction (combinedpython.py)**
 
-As the user types, the my-app frontend uses low-level JavaScript event listeners (onKeyDown and onKeyUp). It records high-precision timestamps (performance.now) and bundles them into a temporal sequence.
+The raw data is transmitted to the Python engine. Here, the timestamps are transformed into the **9 parameters** listed above. This component acts as the mathematical core, deriving the Overlap and Instant WPM values from the raw stream.
 
-Step 2: Payload Transmission
+### **3. Classification (user_detector.py)**
 
-The React app sends a POST request containing the raw sequence to server.py.
+The system calculates the **Grid Distance** and uses a mathematical similarity algorithm to compare the live typing sample against the authorized user's "Master Profile."
 
-Step 3: Feature Extraction (combinedpython.py)
+* **Verification:** If the timing variance is within the user's historical profile, identity is confirmed.
+* **Mitigation:** If the timing is too mechanical (suggesting a bot) or too erratic (suggesting an intruder), access is denied.
 
-The Python backend processes the raw timestamps to calculate the nine parameters listed above. It transforms raw time into a "Feature Vector"—a mathematical representation of that specific typing session.
+---
 
-Step 4: Profile Comparison (user_detector.py)
+## 📂 **Repository Components**
 
-The system performs a Manhattan Distance calculation between the current session's Feature Vector and the "Master Profile" stored in UserData/.
+* **`server.py`** — **The API Gateway.** Manages the secure bridge between the web interface and the Python processing engine.
+* **`combinedpython.py`** — **The Orchestrator.** The central logic unit that calculates complex parameters like Overlap, Flight Times, and WPM metrics.
+* **`user_detector.py`** — **The Classifier.** The decision-making engine that applies weights based on Grid Distance and performs final identity verification.
+* **`prerequisite.py`** — **The Enrollment Tool.** A specialized script used to train the system by recording a user's baseline typing signature.
+* **`my-app/`** — **The Frontend.** A React-based application optimized for ultra-low latency keystroke tracking and user feedback.
+* **`UserData/`** — **The Vault.** A secure directory used to store the mathematical behavioral models of registered users.
 
-Step 5: Decision Logic
+---
 
-Validation: If the variance is within the user's historical standard deviation (σ), an authentication token is issued.
+## 🚀 **Getting Started**
 
-Rejection: If the timing is too mechanical (suggesting a script) or too erratic (suggesting an intruder), access is denied.
+1. **Environment Setup:** Install the necessary libraries listed in the requirements file.
+2. **Enroll Your Identity:** Use the enrollment tool to type your chosen phrase several times to build your unique behavioral profile.
+3. **Launch the System:** Initialize the backend server followed by the frontend development environment.
+4. **Authenticate:** Simply type your phrase into the UI; the system will recognize you by your rhythm.
 
-📂 Repository Components
-server.py The API Gateway. It serves as the bridge between the web interface and the Python processing engine.
-
-combinedpython.py The Core Engine. This script calculates the complex parameters like Overlap, Flight Times, and Instant WPM.
-
-user_detector.py The Classifier. It contains the logic for Grid Distance weighting and final identity verification.
-
-prerequisite.py The Enrollment Tool. Used to train the system on a new user's typing behavior to establish a baseline.
-
-UserData/ The Secure Vault. Stores the mathematical models of authorized users.
-
-my-app/ The React UI. A clean interface designed to capture keystrokes without adding input latency.
-
-🚀 How to Run
-Install requirements: pip install -r requirements.txt
-
-Enroll your pattern: python prerequisite.py (Follow the prompts to type your signature phrase).
-
-Start the Backend: python server.py
-
-Start the Frontend: cd my-app && npm start
+---
